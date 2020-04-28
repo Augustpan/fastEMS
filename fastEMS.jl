@@ -269,26 +269,15 @@ function ordinate(X, ax=1)
 end
 
 function ca(X)
-	r = sum(X, dims=2)
-	c = sum(X, dims=1)
-	N = sum(r)
-	R = diagm(0 => r[:])
-	C = diagm(0 => c[:])
-
-	Risq = sqrt(inv(R))
-	Cisq = sqrt(inv(C))
-
-	M = Risq * X * Cisq
-	Mt = transpose(M)
-	P = M * Mt
-	Q = Mt * M
-
-	vecs_p = eig(P)
-	vecs_q = eig(Q)
-
-	V = sqrt(N) * transpose(vecs_p) * Risq
-	W = sqrt(N) * transpose(vecs_q) * Cisq
-
+	tot = sum(X)
+	Y = X / tot
+	rw = sum(Y, dims=2)
+	cw = sum(Y, dims=1)
+	rc = rw * cw
+	Y = (Y-rc) ./ sqrt.(rc)
+	F = svd(Y, full=true)
+	V = F.U ./ sqrt.(rw)
+	W = F.V ./ sqrt.(cw)
 	return V, W
 end
 
