@@ -1,6 +1,10 @@
-# fastEMS
+# fastEMS -- faster analsyis of metacommunity structure with NGS data
 
-fastEMS.jl is a Julia re-implementation of the EMS analysis (elements of meta-community structure, Presley et al. 2010). This script is more than 100x faster than the original MATLAB implementation, and also much faster than the implementation in R package `metacom` (Dallas, 2020). As is known to me, this is the only software that is capable of doing EMS analysis using next-generation sequencing data.
+author: Yuanfei Pan
+mail: yfpan16@fudan.edu.cn
+ref: Yuanfei Pan (2020). fastEMS: faster analsyis of metacommunity structure with NGS data. https://github.com/Augustpan/fastEMS
+
+fastEMS.jl is a Julia re-implementation of the EMS analysis (elements of meta-community structure, Presley et al. 2010). This script is more than 100x faster than the original MATLAB implementation, and also much faster than the implementation in R package `metacom` (Dallas, 2020). As is known to me, this is the **only** software that is capable of doing EMS analysis using next-generation sequencing data.
 
 
 ## Reference:
