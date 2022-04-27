@@ -16,7 +16,6 @@ using ProgressMeter
 function metacommunity(X, nsim=200)
 	Abs, Apr, MA, SA = coherence(X, nsim)
 	Re, Rpr, MR, SR = turnover(X, nsim)
-	M, Mpr = clumping(X)
 	ret = [Abs, Apr, MA, SA, Re, Rpr, MR, SR, M, Mpr]
 	return ret
 end
@@ -261,10 +260,10 @@ end
 
 function ordinate(X, ax=1)
 	V, W = ca(X)
-	ir = sortperm(@view V[ax+1,:])
-	ic = sortperm(@view W[ax+1,:])
+	ir = sortperm(@view V[:,ax])
+	ic = sortperm(@view W[:,ax])
 	Y = @view X[ir,ic]
-	Y = @view Y[size(Y,1):-1:1,:]
+	#Y = @view Y[size(Y,1):-1:1,:]
 	return Y
 end
 
@@ -277,7 +276,8 @@ function ca(X)
 	Y = (Y-rc) ./ sqrt.(rc)
 	F = svd(Y, full=true)
 	V = F.U ./ sqrt.(rw)
-	W = F.V ./ sqrt.(cw)
+	# W = F.V ./ sqrt.(cw)
+	W = transpose(F.Vt ./ sqrt.(cw))
 	return V, W
 end
 
